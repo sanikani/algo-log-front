@@ -51,6 +51,29 @@ export interface Solution {
   updatedAt: string
 }
 
+export interface ProblemRequest {
+  platform: string
+  externalProblemId: string
+  title: string
+  problemUrl: string
+  difficulty: string
+}
+
+export interface SolutionCreateRequest {
+  code: string
+  timeElapsed: number
+  solved: boolean
+  memoMarkdown: string
+  problem: ProblemRequest
+}
+
+export interface SolutionUpdateRequest {
+  code: string
+  timeElapsed: number
+  solved: boolean
+  memoMarkdown: string
+}
+
 export interface DashboardSummary {
   totalCount: number
   solvedCount: number

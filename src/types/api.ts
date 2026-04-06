@@ -30,6 +30,27 @@ export interface DashboardCount {
   count: number
 }
 
+export interface Problem {
+  id: number
+  platform: string
+  externalProblemId: string
+  title: string
+  problemUrl: string
+  difficulty: string
+}
+
+export interface Solution {
+  id: number
+  code: string
+  timeElapsed: number
+  solved: boolean
+  memoMarkdown: string
+  problem: Problem
+  memberId: number
+  createdAt: string
+  updatedAt: string
+}
+
 export interface DashboardSummary {
   totalCount: number
   solvedCount: number

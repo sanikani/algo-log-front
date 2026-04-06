@@ -37,3 +37,8 @@ export interface DashboardSummary {
   platformCounts: DashboardCount[]
   difficultyCounts: DashboardCount[]
 }
+
+export interface HeatmapDay {
+  date: string
+  solvedCount: number
+}

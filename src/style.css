@@ -117,6 +117,7 @@ a {
 }
 
 .status-grid,
+.stats-grid,
 .placeholder-grid {
   display: grid;
   gap: 16px;
@@ -125,6 +126,7 @@ a {
 }
 
 .status-card,
+.metric-card,
 .placeholder-card {
   padding: 22px;
   border-radius: 18px;
@@ -133,6 +135,7 @@ a {
 }
 
 .status-card span,
+.metric-card span,
 .placeholder-card span {
   display: block;
   font-size: 0.82rem;
@@ -142,10 +145,20 @@ a {
 }
 
 .status-card strong,
+.metric-card strong,
 .placeholder-card strong {
   display: block;
   margin-top: 12px;
   font-size: 1.05rem;
+}
+
+.metric-card strong {
+  font-size: 2.2rem;
+}
+
+.metric-card p {
+  margin: 12px 0 0;
+  color: var(--color-text-muted);
 }
 
 .shell-layout {
@@ -224,6 +237,103 @@ a {
   margin-top: 28px;
 }
 
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.panel-card {
+  padding: 24px;
+  border-radius: 20px;
+  background: rgba(31, 32, 33, 0.92);
+  box-shadow: var(--shadow-ambient);
+}
+
+.heatmap-panel {
+  grid-row: span 2;
+}
+
+.panel-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.panel-header h3 {
+  margin: 8px 0 0;
+  font-size: 1.4rem;
+}
+
+.panel-caption {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 12px;
+  gap: 6px;
+  margin-top: 24px;
+  overflow-x: auto;
+}
+
+.heatmap-column {
+  display: grid;
+  gap: 6px;
+}
+
+.heatmap-cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  background: rgba(52, 53, 54, 0.9);
+}
+
+.heatmap-level-1 {
+  background: rgba(167, 202, 243, 0.35);
+}
+
+.heatmap-level-2 {
+  background: rgba(167, 202, 243, 0.55);
+}
+
+.heatmap-level-3 {
+  background: rgba(128, 131, 255, 0.72);
+}
+
+.heatmap-level-4 {
+  background: #c0c1ff;
+}
+
+.heatmap-fallback {
+  margin-top: 24px;
+  color: var(--color-text-muted);
+}
+
+.distribution-list {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+}
+
+.distribution-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-top: 1px solid var(--color-outline);
+}
+
+.distribution-list li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
 @media (max-width: 640px) {
   .landing-panel {
     padding: 28px;
@@ -248,5 +358,13 @@ a {
   .shell-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .heatmap-panel {
+    grid-row: auto;
   }
 }

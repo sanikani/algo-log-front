@@ -1,45 +1,45 @@
 <template>
   <AppShell
-    eyebrow="Dashboard"
-    title="Study signals and weekly rhythm"
-    description="Review your total attempts, success balance, platform spread, and the past year of activity without leaving one screen."
+    eyebrow="대시보드"
+    title="학습 신호와 주간 리듬"
+    description="총 시도 수, 성공과 실패의 균형, 플랫폼 분포, 지난 1년 활동을 한 화면에서 확인하세요."
   >
     <template v-if="authQuery.isPending.value">
       <section class="placeholder-grid">
         <article class="placeholder-card">
-          <span>Status</span>
-          <strong>Checking session</strong>
+          <span>상태</span>
+          <strong>세션 상태 확인 중</strong>
         </article>
         <article class="placeholder-card">
-          <span>Loading</span>
-          <strong>Fetching dashboard metrics</strong>
+          <span>불러오기</span>
+          <strong>대시보드 지표를 불러오는 중</strong>
         </article>
       </section>
     </template>
 
     <template v-else-if="authQuery.isUnauthorized.value">
       <section class="placeholder-card">
-        <span>Status</span>
-        <strong>Redirecting to sign-in</strong>
+        <span>상태</span>
+        <strong>로그인 화면으로 이동 중</strong>
       </section>
     </template>
 
     <template v-else-if="summary">
       <section class="stats-grid">
         <article class="metric-card">
-          <span>Total Notes</span>
+          <span>총 노트</span>
           <strong>{{ summary.totalCount }}</strong>
-          <p>All saved solution records in your account.</p>
+          <p>계정에 저장된 모든 풀이 기록입니다.</p>
         </article>
         <article class="metric-card">
-          <span>Solved</span>
+          <span>해결</span>
           <strong>{{ summary.solvedCount }}</strong>
-          <p>Successful submissions turned into study notes.</p>
+          <p>성공한 제출을 학습 노트로 정리한 수입니다.</p>
         </article>
         <article class="metric-card">
-          <span>Failed</span>
+          <span>실패</span>
           <strong>{{ summary.failedCount }}</strong>
-          <p>Attempts worth revisiting before the next round.</p>
+          <p>다음 도전 전에 다시 살펴볼 시도입니다.</p>
         </article>
       </section>
 
@@ -48,9 +48,9 @@
           <div class="panel-header">
             <div>
               <p class="shell-section-label">
-                Heatmap
+                열 지도
               </p>
-              <h3>Past 12 months</h3>
+              <h3>지난 12개월</h3>
             </div>
             <p class="panel-caption">
               {{ heatmapCaption }}
@@ -61,13 +61,13 @@
             v-if="heatmapQuery.isLoading.value"
             class="heatmap-fallback"
           >
-            Loading heatmap...
+            열 지도를 불러오는 중...
           </div>
           <div
             v-else-if="heatmapQuery.isError.value"
             class="heatmap-fallback"
           >
-            Heatmap is temporarily unavailable.
+            열 지도를 일시적으로 사용할 수 없습니다.
           </div>
           <div
             v-else
@@ -82,7 +82,7 @@
                 v-for="cell in column"
                 :key="cell.key"
                 :class="['heatmap-cell', `heatmap-level-${cell.level}`]"
-                :title="`${cell.label}: ${cell.count} solved`"
+                :title="`${cell.label}: ${cell.count}회 해결`"
               />
             </div>
           </div>
@@ -92,9 +92,9 @@
           <div class="panel-header">
             <div>
               <p class="shell-section-label">
-                Platform Mix
+                플랫폼 분포
               </p>
-              <h3>Where you practice</h3>
+              <h3>어디에서 연습했는지</h3>
             </div>
           </div>
 
@@ -113,9 +113,9 @@
           <div class="panel-header">
             <div>
               <p class="shell-section-label">
-                Difficulty Mix
+                난이도 분포
               </p>
-              <h3>Challenge distribution</h3>
+              <h3>도전 난이도 분포</h3>
             </div>
           </div>
 
@@ -157,9 +157,9 @@ const summary = computed(() => authQuery.data.value)
 const heatmapColumns = computed(() => buildHeatmapColumns(heatmapQuery.data.value ?? []))
 const heatmapCaption = computed(() => {
   if (!heatmapQuery.data.value?.length) {
-    return 'No solved activity recorded yet.'
+    return '아직 기록된 해결 활동이 없습니다.'
   }
 
-  return `${heatmapQuery.data.value.length} active day records loaded`
+  return `${heatmapQuery.data.value.length}개의 활성 일자 기록을 불러왔습니다.`
 })
 </script>

@@ -1,38 +1,38 @@
 <template>
   <AppShell
-    eyebrow="Problem List"
-    title="Search your solution history"
-    description="Filter by title, platform, or difficulty, then jump directly into the note you want to review."
+    eyebrow="문제 목록"
+    title="내 풀이 기록을 검색하세요"
+    description="제목, 플랫폼, 난이도로 걸러보고 바로 다시 볼 노트로 이동하세요."
   >
     <template v-if="authQuery.isPending.value || solutionsQuery.isLoading.value">
       <section class="placeholder-grid">
         <article class="placeholder-card">
-          <span>Status</span>
-          <strong>Loading solution history</strong>
+          <span>상태</span>
+          <strong>풀이 기록을 불러오는 중</strong>
         </article>
       </section>
     </template>
 
     <template v-else-if="authQuery.isUnauthorized.value">
       <section class="placeholder-card">
-        <span>Status</span>
-        <strong>Redirecting to sign-in</strong>
+        <span>상태</span>
+        <strong>로그인 화면으로 이동 중</strong>
       </section>
     </template>
 
     <template v-else-if="solutionsQuery.data.value">
       <section class="toolbar-row">
         <label class="search-input">
-          <span>Search</span>
+          <span>검색</span>
           <input
             v-model="keyword"
             type="search"
-            placeholder="Search title, platform, difficulty"
+            placeholder="제목, 플랫폼, 난이도로 검색"
           >
         </label>
 
         <p class="results-caption">
-          {{ filteredSolutions.length }} results
+          {{ filteredSolutions.length }}개 결과
         </p>
       </section>
 
@@ -51,7 +51,7 @@
               <h3>{{ solution.problem.title }}</h3>
             </div>
             <span :class="['status-pill', solution.solved ? 'status-pill-success' : 'status-pill-fail']">
-              {{ solution.solved ? 'Solved' : 'Retry' }}
+              {{ solution.solved ? '해결' : '재시도' }}
             </span>
           </div>
 
@@ -95,7 +95,7 @@ const filteredSolutions = computed(() =>
 )
 
 function truncateMemo(markdown: string) {
-  return markdown.replace(/\s+/g, ' ').trim().slice(0, 140) || 'No memo yet.'
+  return markdown.replace(/\s+/g, ' ').trim().slice(0, 140) || '메모가 아직 없습니다.'
 }
 
 function formatDate(value: string) {

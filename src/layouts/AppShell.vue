@@ -6,7 +6,7 @@
           AlgoLog
         </p>
         <h1 class="shell-title">
-          Developer notebook for algorithm drills.
+          알고리즘 연습을 위한 개발자 노트북.
         </h1>
       </div>
 
@@ -15,13 +15,13 @@
         aria-label="Primary"
       >
         <RouterLink to="/dashboard">
-          Dashboard
+          대시보드
         </RouterLink>
         <RouterLink to="/problems">
-          Problem List
+          문제 목록
         </RouterLink>
         <RouterLink to="/problems/new">
-          Write Note
+          노트 작성
         </RouterLink>
       </nav>
 
@@ -29,7 +29,7 @@
         class="ghost-link"
         :href="logoutUrl"
       >
-        Sign out
+        로그아웃
       </a>
     </aside>
 

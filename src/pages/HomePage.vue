@@ -2,14 +2,14 @@
   <main class="landing-page">
     <section class="landing-panel">
       <p class="eyebrow">
-        AlgoLog Workspace
+        AlgoLog 작업 공간
       </p>
       <h1>
-        Turn solved problems into a learning trail you can actually revisit.
+        풀어낸 문제를 학습 기록으로 남겨 다시 돌아보세요.
       </h1>
       <p class="lead">
-        GitHub OAuth session auth is wired for the existing Spring backend. Enter through GitHub
-        and the dashboard becomes the single source of truth for session status.
+        기존 Spring 백엔드에 GitHub OAuth 세션 인증이 연결되어 있습니다. GitHub로
+        진입하면 대시보드에서 세션 상태를 한눈에 확인할 수 있습니다.
       </p>
 
       <div class="landing-actions">
@@ -17,28 +17,28 @@
           class="primary-button"
           :href="githubLoginUrl"
         >
-          Continue with GitHub
+          GitHub로 계속하기
         </a>
         <RouterLink
           class="secondary-button"
           to="/dashboard"
         >
-          Try current session
+          현재 세션 확인하기
         </RouterLink>
       </div>
 
       <div class="status-grid">
         <article class="status-card">
-          <span>Auth probe</span>
+          <span>인증 상태 확인</span>
           <strong>{{ authMessage }}</strong>
         </article>
         <article class="status-card">
-          <span>Protected routes</span>
+          <span>보호된 경로</span>
           <strong>/dashboard, /problems</strong>
         </article>
         <article class="status-card">
-          <span>Runtime mode</span>
-          <strong>Credential-based API client</strong>
+          <span>실행 모드</span>
+          <strong>자격 증명 기반 API 클라이언트</strong>
         </article>
       </div>
     </section>
@@ -57,17 +57,17 @@ const authQuery = useAuthStatusQuery()
 
 const authMessage = computed(() => {
   if (authQuery.isPending.value) {
-    return 'Checking session...'
+    return '세션을 확인하는 중...'
   }
 
   if (authQuery.isAuthenticated.value) {
-    return 'Authenticated session detected'
+    return '인증된 세션이 확인되었습니다'
   }
 
   if (authQuery.isUnauthorized.value) {
-    return 'Sign in required'
+    return '로그인이 필요합니다'
   }
 
-  return 'Probe unavailable'
+  return '상태를 확인할 수 없습니다'
 })
 </script>

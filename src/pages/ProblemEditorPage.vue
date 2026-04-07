@@ -123,7 +123,7 @@
               </label>
 
               <label class="form-field form-field-wide">
-                <span>메모(Markdown)</span>
+                <span>메모(마크다운)</span>
                 <textarea
                   v-model="form.memoMarkdown"
                   rows="12"

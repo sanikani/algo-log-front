@@ -15,7 +15,7 @@ vi.mock('./features/auth/useAuthStatusQuery', () => ({
 }))
 
 describe('App', () => {
-  it('GitHub 로그인 랜딩 화면을 렌더링한다', async () => {
+  it('renders the GitHub login entry screen', async () => {
     router.push('/')
     await router.isReady()
 

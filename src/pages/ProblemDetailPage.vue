@@ -2,20 +2,20 @@
 <template>
   <AppShell
     eyebrow="문제 상세"
-    title="하나의 알고리즘 노트를 살펴봅니다"
-    description="문제 정보, 실행 결과, 코드, 마크다운 메모를 한 화면에서 확인할 수 있습니다."
+    title="알고리즘 노트 자세히 보기"
+    description="문제 메타데이터, 실행 기록, 코드, 마크다운 메모를 한 화면에서 확인합니다."
   >
     <template v-if="authQuery.isPending.value || solutionQuery.isLoading.value">
       <section class="placeholder-card">
         <span>상태</span>
-        <strong>문제 상세를 불러오는 중입니다</strong>
+        <strong>노트 상세 정보를 불러오는 중입니다</strong>
       </section>
     </template>
 
     <template v-else-if="authQuery.isUnauthorized.value">
       <section class="placeholder-card">
         <span>상태</span>
-        <strong>로그인 화면으로 이동하는 중입니다</strong>
+        <strong>로그인 화면으로 이동 중입니다</strong>
       </section>
     </template>
 
@@ -29,12 +29,12 @@
         <article class="metric-card">
           <span>난이도</span>
           <strong>{{ solution.problem.difficulty }}</strong>
-          <p>{{ solution.solved ? '풀이 완료' : '다시 검토 필요' }}</p>
+          <p>{{ solution.solved ? '해결 완료' : '다시 풀이 필요' }}</p>
         </article>
         <article class="metric-card">
-          <span>소요 시간</span>
+          <span>실행 시간</span>
           <strong>{{ solution.timeElapsed }} ms</strong>
-          <p>{{ formatDate(solution.updatedAt) }}에 업데이트됨</p>
+          <p>마지막 수정 {{ formatDate(solution.updatedAt) }}</p>
         </article>
       </section>
 
@@ -45,7 +45,7 @@
           target="_blank"
           rel="noreferrer"
         >
-          문제 보기
+          문제 보러 가기
         </a>
         <div class="detail-actions">
           <RouterLink
@@ -60,7 +60,7 @@
             :disabled="deleteMutation.isPending.value"
             @click="handleDelete"
           >
-            {{ deleteMutation.isPending.value ? '삭제하는 중...' : '삭제' }}
+            {{ deleteMutation.isPending.value ? '삭제 중...' : '삭제' }}
           </button>
         </div>
       </section>

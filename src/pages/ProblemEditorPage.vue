@@ -1,13 +1,13 @@
 <template>
   <AppShell
     :eyebrow="mode === 'edit' ? '문제 수정' : '노트 작성'"
-    :title="mode === 'edit' ? '알고리즘 노트를 수정합니다' : '새 풀이 기록을 작성합니다'"
-    description="문제 정보를 한 번 입력한 뒤, 코드와 메모를 계속 다듬어 가세요."
+    :title="mode === 'edit' ? '알고리즘 노트 수정하기' : '새 풀이 기록 남기기'"
+    description="문제 정보를 한 번 기록해 두고, 풀이 코드와 메모를 이해가 쌓일 때마다 계속 다듬습니다."
   >
     <template v-if="isEditMode && solutionQuery.isLoading.value">
       <section class="placeholder-card">
         <span>상태</span>
-        <strong>편집 정보를 불러오는 중입니다</strong>
+        <strong>수정 화면 정보를 불러오는 중입니다</strong>
       </section>
     </template>
 
@@ -23,7 +23,7 @@
                 <p class="shell-section-label">
                   문제 정보
                 </p>
-                <h3>기준 정보</h3>
+                <h3>기본 정보</h3>
               </div>
             </div>
 
@@ -39,7 +39,7 @@
               </label>
 
               <label class="form-field">
-                <span>문제 번호</span>
+                <span>문제 ID</span>
                 <input
                   v-model="form.problem.externalProblemId"
                   :disabled="isEditMode"
@@ -84,9 +84,9 @@
             <div class="panel-header">
               <div>
                 <p class="shell-section-label">
-                  풀이
+                  풀이 내용
                 </p>
-                <h3>{{ isEditMode ? '메모를 다듬습니다' : '첫 버전을 작성합니다' }}</h3>
+                <h3>{{ isEditMode ? '노트 다듬기' : '첫 풀이 기록 작성' }}</h3>
               </div>
             </div>
 
@@ -108,7 +108,7 @@
                     v-model="form.solved"
                     type="checkbox"
                   >
-                  <span>{{ form.solved ? '풀이 완료' : '다시 검토 필요' }}</span>
+                  <span>{{ form.solved ? '해결 완료' : '다시 풀이 필요' }}</span>
                 </label>
               </label>
 
@@ -117,17 +117,17 @@
                 <textarea
                   v-model="form.code"
                   rows="14"
-                  placeholder="풀이 코드를 붙여넣으세요"
+                  placeholder="풀이 코드를 붙여 넣어 주세요"
                 />
                 <small v-if="getError('code')">{{ getError('code') }}</small>
               </label>
 
               <label class="form-field form-field-wide">
-                <span>메모(마크다운)</span>
+                <span>메모 (Markdown)</span>
                 <textarea
                   v-model="form.memoMarkdown"
                   rows="12"
-                  placeholder="배운 점과 다시 확인할 부분을 적어보세요"
+                  placeholder="무엇을 배웠는지, 다시 볼 포인트가 무엇인지 적어 보세요"
                 />
                 <small v-if="getError('memoMarkdown')">{{ getError('memoMarkdown') }}</small>
               </label>
@@ -147,7 +147,7 @@
             type="submit"
             :disabled="isSubmitting"
           >
-            {{ isSubmitting ? '저장하는 중...' : isEditMode ? '수정 저장' : '노트 등록' }}
+            {{ isSubmitting ? '저장 중...' : isEditMode ? '노트 수정' : '노트 생성' }}
           </button>
         </div>
       </form>

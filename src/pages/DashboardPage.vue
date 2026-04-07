@@ -27,19 +27,19 @@
     <template v-else-if="summary">
       <section class="stats-grid">
         <article class="metric-card">
-          <span>총 노트</span>
+          <span>총 풀이 기록</span>
           <strong>{{ summary.totalCount }}</strong>
           <p>계정에 저장된 모든 풀이 기록입니다.</p>
         </article>
         <article class="metric-card">
           <span>해결</span>
           <strong>{{ summary.solvedCount }}</strong>
-          <p>성공한 제출을 학습 노트로 정리한 수입니다.</p>
+          <p>성공한 제출을 풀이 기록으로 정리한 수입니다.</p>
         </article>
         <article class="metric-card">
           <span>실패</span>
           <strong>{{ summary.failedCount }}</strong>
-          <p>다음 도전 전에 다시 살펴볼 시도입니다.</p>
+          <p>다음 도전 전에 다시 살펴볼 풀이 기록입니다.</p>
         </article>
       </section>
 

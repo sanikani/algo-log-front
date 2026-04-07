@@ -1,13 +1,13 @@
 <template>
   <AppShell
-    :eyebrow="mode === 'edit' ? 'Edit Problem' : 'Write Note'"
-    :title="mode === 'edit' ? 'Update your algorithm note' : 'Capture a fresh solution record'"
-    description="Capture the problem metadata once, then keep updating the code and memo as your understanding evolves."
+    :eyebrow="mode === 'edit' ? '문제 수정' : '노트 작성'"
+    :title="mode === 'edit' ? '알고리즘 노트를 수정합니다' : '새 풀이 기록을 작성합니다'"
+    description="문제 정보를 한 번 입력한 뒤, 코드와 메모를 계속 다듬어 가세요."
   >
     <template v-if="isEditMode && solutionQuery.isLoading.value">
       <section class="placeholder-card">
-        <span>Status</span>
-        <strong>Loading editor state</strong>
+        <span>상태</span>
+        <strong>편집 정보를 불러오는 중입니다</strong>
       </section>
     </template>
 
@@ -21,59 +21,59 @@
             <div class="panel-header">
               <div>
                 <p class="shell-section-label">
-                  Problem Meta
+                  문제 정보
                 </p>
-                <h3>Reference data</h3>
+                <h3>기준 정보</h3>
               </div>
             </div>
 
             <div class="form-grid">
               <label class="form-field">
-                <span>Platform</span>
+                <span>플랫폼</span>
                 <input
                   v-model="form.problem.platform"
                   :disabled="isEditMode"
-                  placeholder="BAEKJOON"
+                  placeholder="예: 백준"
                 >
                 <small v-if="getError('problem.platform')">{{ getError('problem.platform') }}</small>
               </label>
 
               <label class="form-field">
-                <span>Problem ID</span>
+                <span>문제 번호</span>
                 <input
                   v-model="form.problem.externalProblemId"
                   :disabled="isEditMode"
-                  placeholder="1000"
+                  placeholder="예: 1000"
                 >
                 <small v-if="getError('problem.externalProblemId')">{{ getError('problem.externalProblemId') }}</small>
               </label>
 
               <label class="form-field form-field-wide">
-                <span>Title</span>
+                <span>제목</span>
                 <input
                   v-model="form.problem.title"
                   :disabled="isEditMode"
-                  placeholder="A+B"
+                  placeholder="예: A+B"
                 >
                 <small v-if="getError('problem.title')">{{ getError('problem.title') }}</small>
               </label>
 
               <label class="form-field form-field-wide">
-                <span>Problem URL</span>
+                <span>문제 URL</span>
                 <input
                   v-model="form.problem.problemUrl"
                   :disabled="isEditMode"
-                  placeholder="https://www.acmicpc.net/problem/1000"
+                  placeholder="예: https://www.acmicpc.net/problem/1000"
                 >
                 <small v-if="getError('problem.problemUrl')">{{ getError('problem.problemUrl') }}</small>
               </label>
 
               <label class="form-field">
-                <span>Difficulty</span>
+                <span>난이도</span>
                 <input
                   v-model="form.problem.difficulty"
                   :disabled="isEditMode"
-                  placeholder="Bronze"
+                  placeholder="예: 브론즈"
                 >
                 <small v-if="getError('problem.difficulty')">{{ getError('problem.difficulty') }}</small>
               </label>
@@ -84,15 +84,15 @@
             <div class="panel-header">
               <div>
                 <p class="shell-section-label">
-                  Solution
+                  풀이
                 </p>
-                <h3>{{ isEditMode ? 'Refine the note' : 'Write the first version' }}</h3>
+                <h3>{{ isEditMode ? '메모를 다듬습니다' : '첫 버전을 작성합니다' }}</h3>
               </div>
             </div>
 
             <div class="form-grid">
               <label class="form-field">
-                <span>Execution Time (ms)</span>
+                <span>실행 시간(ms)</span>
                 <input
                   v-model.number="form.timeElapsed"
                   type="number"
@@ -102,32 +102,32 @@
               </label>
 
               <label class="form-field checkbox-field">
-                <span>Result</span>
+                <span>결과</span>
                 <label class="checkbox-label">
                   <input
                     v-model="form.solved"
                     type="checkbox"
                   >
-                  <span>{{ form.solved ? 'Solved' : 'Retry needed' }}</span>
+                  <span>{{ form.solved ? '풀이 완료' : '다시 검토 필요' }}</span>
                 </label>
               </label>
 
               <label class="form-field form-field-wide">
-                <span>Code</span>
+                <span>코드</span>
                 <textarea
                   v-model="form.code"
                   rows="14"
-                  placeholder="Paste your solution code"
+                  placeholder="풀이 코드를 붙여넣으세요"
                 />
                 <small v-if="getError('code')">{{ getError('code') }}</small>
               </label>
 
               <label class="form-field form-field-wide">
-                <span>Memo (Markdown)</span>
+                <span>메모(Markdown)</span>
                 <textarea
                   v-model="form.memoMarkdown"
                   rows="12"
-                  placeholder="What did you learn? What would you revisit?"
+                  placeholder="배운 점과 다시 확인할 부분을 적어보세요"
                 />
                 <small v-if="getError('memoMarkdown')">{{ getError('memoMarkdown') }}</small>
               </label>
@@ -140,14 +140,14 @@
             class="secondary-button"
             to="/problems"
           >
-            Cancel
+            취소
           </RouterLink>
           <button
             class="primary-button button-reset"
             type="submit"
             :disabled="isSubmitting"
           >
-            {{ isSubmitting ? 'Saving...' : isEditMode ? 'Update note' : 'Create note' }}
+            {{ isSubmitting ? '저장하는 중...' : isEditMode ? '수정 저장' : '노트 등록' }}
           </button>
         </div>
       </form>

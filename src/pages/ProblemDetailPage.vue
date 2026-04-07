@@ -1,40 +1,40 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <AppShell
-    eyebrow="Problem Detail"
-    title="Inspect a single algorithm note"
-    description="Review the original problem metadata, execution snapshot, code, and markdown memo in one place."
+    eyebrow="문제 상세"
+    title="하나의 알고리즘 노트를 살펴봅니다"
+    description="문제 정보, 실행 결과, 코드, 마크다운 메모를 한 화면에서 확인할 수 있습니다."
   >
     <template v-if="authQuery.isPending.value || solutionQuery.isLoading.value">
       <section class="placeholder-card">
-        <span>Status</span>
-        <strong>Loading note detail</strong>
+        <span>상태</span>
+        <strong>문제 상세를 불러오는 중입니다</strong>
       </section>
     </template>
 
     <template v-else-if="authQuery.isUnauthorized.value">
       <section class="placeholder-card">
-        <span>Status</span>
-        <strong>Redirecting to sign-in</strong>
+        <span>상태</span>
+        <strong>로그인 화면으로 이동하는 중입니다</strong>
       </section>
     </template>
 
     <template v-else-if="solution">
       <section class="stats-grid">
         <article class="metric-card">
-          <span>Platform</span>
+          <span>플랫폼</span>
           <strong>{{ solution.problem.platform }}</strong>
           <p>#{{ solution.problem.externalProblemId }}</p>
         </article>
         <article class="metric-card">
-          <span>Difficulty</span>
+          <span>난이도</span>
           <strong>{{ solution.problem.difficulty }}</strong>
-          <p>{{ solution.solved ? 'Solved' : 'Retry needed' }}</p>
+          <p>{{ solution.solved ? '풀이 완료' : '다시 검토 필요' }}</p>
         </article>
         <article class="metric-card">
-          <span>Elapsed</span>
+          <span>소요 시간</span>
           <strong>{{ solution.timeElapsed }} ms</strong>
-          <p>Updated {{ formatDate(solution.updatedAt) }}</p>
+          <p>{{ formatDate(solution.updatedAt) }}에 업데이트됨</p>
         </article>
       </section>
 
@@ -45,14 +45,14 @@
           target="_blank"
           rel="noreferrer"
         >
-          Open Problem
+          문제 보기
         </a>
         <div class="detail-actions">
           <RouterLink
             class="secondary-button"
             :to="`/problems/${solution.id}/edit`"
           >
-            Edit
+            수정
           </RouterLink>
           <button
             class="danger-button"
@@ -60,7 +60,7 @@
             :disabled="deleteMutation.isPending.value"
             @click="handleDelete"
           >
-            {{ deleteMutation.isPending.value ? 'Deleting...' : 'Delete' }}
+            {{ deleteMutation.isPending.value ? '삭제하는 중...' : '삭제' }}
           </button>
         </div>
       </section>
@@ -70,7 +70,7 @@
           <div class="panel-header">
             <div>
               <p class="shell-section-label">
-                Code
+                코드
               </p>
               <h3>{{ solution.problem.title }}</h3>
             </div>
@@ -83,9 +83,9 @@
           <div class="panel-header">
             <div>
               <p class="shell-section-label">
-                Memo
+                메모
               </p>
-              <h3>Markdown notes</h3>
+              <h3>마크다운 메모</h3>
             </div>
           </div>
 

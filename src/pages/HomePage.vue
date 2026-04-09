@@ -8,8 +8,8 @@
         Turn solved problems into a learning trail you can actually revisit.
       </h1>
       <p class="lead">
-        GitHub OAuth session auth is wired for the existing Spring backend. Enter through GitHub
-        and the dashboard becomes the single source of truth for session status.
+        Sign in with GitHub to review past notes, capture a fresh solution, and keep your practice
+        history in one place.
       </p>
 
       <div class="landing-actions">
@@ -23,22 +23,22 @@
           class="secondary-button"
           to="/dashboard"
         >
-          Try current session
+          Preview the dashboard
         </RouterLink>
       </div>
 
       <div class="status-grid">
         <article class="status-card">
-          <span>Auth probe</span>
+          <span>Session status</span>
           <strong>{{ authMessage }}</strong>
         </article>
         <article class="status-card">
-          <span>Protected routes</span>
-          <strong>/dashboard, /problems</strong>
+          <span>After sign-in</span>
+          <strong>Land on your dashboard and start the next note.</strong>
         </article>
         <article class="status-card">
-          <span>Runtime mode</span>
-          <strong>Credential-based API client</strong>
+          <span>Inside the workspace</span>
+          <strong>Dashboard, problem history, and note writing stay one click away.</strong>
         </article>
       </div>
     </section>
@@ -46,14 +46,25 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { RouterLink } from 'vue-router'
+import { computed, watch } from 'vue'
+import { RouterLink, useRouter } from 'vue-router'
 
 import { getGithubLoginUrl } from '../features/auth/auth'
 import { useAuthStatusQuery } from '../features/auth/useAuthStatusQuery'
 
+const router = useRouter()
 const githubLoginUrl = getGithubLoginUrl()
 const authQuery = useAuthStatusQuery()
+
+watch(
+  authQuery.isAuthenticated,
+  (isAuthenticated) => {
+    if (isAuthenticated) {
+      router.replace('/dashboard')
+    }
+  },
+  { immediate: true },
+)
 
 const authMessage = computed(() => {
   if (authQuery.isPending.value) {
@@ -61,7 +72,7 @@ const authMessage = computed(() => {
   }
 
   if (authQuery.isAuthenticated.value) {
-    return 'Authenticated session detected'
+    return 'Signed in — sending you to the dashboard'
   }
 
   if (authQuery.isUnauthorized.value) {

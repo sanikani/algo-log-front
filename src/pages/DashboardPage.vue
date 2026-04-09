@@ -25,6 +25,34 @@
     </template>
 
     <template v-else-if="summary">
+      <section class="arrival-card">
+        <div class="arrival-copy">
+          <p class="shell-section-label">
+            Session active
+          </p>
+          <h3>Signed in and ready to continue</h3>
+          <p class="arrival-message">
+            Signed in with your current GitHub session. Review your progress, then jump straight
+            into the next note when you are ready.
+          </p>
+        </div>
+
+        <div class="arrival-actions">
+          <RouterLink
+            class="primary-button"
+            to="/problems/new"
+          >
+            Write a note
+          </RouterLink>
+          <RouterLink
+            class="secondary-button"
+            to="/problems"
+          >
+            Browse problem list
+          </RouterLink>
+        </div>
+      </section>
+
       <section class="stats-grid">
         <article class="metric-card">
           <span>Total Notes</span>
@@ -136,7 +164,7 @@
 
 <script setup lang="ts">
 import { computed, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 
 import { useAuthStatusQuery } from '../features/auth/useAuthStatusQuery'
 import { buildHeatmapColumns } from '../features/dashboard/heatmap'
@@ -163,3 +191,42 @@ const heatmapCaption = computed(() => {
   return `${heatmapQuery.data.value.length} active day records loaded`
 })
 </script>
+
+<style scoped>
+.arrival-card {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(192, 193, 255, 0.16);
+  border-radius: 20px;
+  background: rgba(31, 32, 33, 0.92);
+  box-shadow: var(--shadow-ambient);
+}
+
+.arrival-copy h3 {
+  margin: 8px 0 0;
+  font-size: 1.5rem;
+}
+
+.arrival-message {
+  max-width: 58ch;
+  margin: 12px 0 0;
+  color: var(--color-text-muted);
+}
+
+.arrival-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .arrival-card {
+    align-items: start;
+    flex-direction: column;
+  }
+}
+</style>

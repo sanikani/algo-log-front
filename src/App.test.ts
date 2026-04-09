@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/vue'
 import { VueQueryPlugin } from '@tanstack/vue-query'
+import { ref } from 'vue'
 import { describe, expect, it } from 'vitest'
 import { vi } from 'vitest'
 
@@ -8,9 +9,9 @@ import router from './router'
 
 vi.mock('./features/auth/useAuthStatusQuery', () => ({
   useAuthStatusQuery: () => ({
-    isPending: { value: false },
-    isAuthenticated: { value: false },
-    isUnauthorized: { value: true },
+    isPending: ref(false),
+    isAuthenticated: ref(false),
+    isUnauthorized: ref(true),
   }),
 }))
 
